@@ -78,3 +78,18 @@ Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 ```
 -   **AWS CLI errors**: Verify your AWS CLI configuration and ensure the `R2` profile is set up correctly.
 -   **Endpoint errors**: Double-check the endpoint URL in the `$endpoint` variable.
+
+## *Upload file to S3*
+To upload the local backup to Backblaze B2, use the following command:
+
+```powershell
+aws s3 cp "F:\BackupVVV\file\all-folders" s3://your-bucket/folder/folder/ --profile backblaze --endpoint-url https://s3.us-west-002.backblazeb2.com --recursive | tee
+```
+### Explanation
+
+-   **`F:\BackupVVV\file\all-folders`**: Path to the local folder you want to upload.
+-   **`s3://your-bucket/folder/folder`**: Destination path in the Backblaze bucket.
+-   **`--profile backblaze`**: AWS CLI profile configured for Backblaze.
+-   **`--endpoint-url https://s3.us-west-002.backblazeb2.com`**: Backblaze S3 endpoint.
+-   **`--recursive`**: Ensures all files and subfolders are uploaded.
+-   **`| tee`**: Outputs logs to both the console and a specified log file (optional). You can redirect to a file if needed, e.g., `| tee upload.log`.
